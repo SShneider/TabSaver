@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Tabs Extension</title>
+    <link rel="stylesheet" type="text/css" href="tabList.css">
+</head>
+<body>
+    <div>
+        <div class="title">Current Tabs</div>
+    <table id = "currentTabs">
+        <tr>
+            <th>Page</th>
+            <th>URL</th>
+        </tr>
+    </table>
+    <div class="buttonDiv">
+    <button id = "saveCurrent">Save All and Close!</button>
+    </div>
+    </div>
+    <div>
+        <div class="title">History 
+            <input type = "checkbox" id = "printable" name ="Printable Version">
+            <label for = "printable">Printable Version</label>
+        </div>
+    <table id = "tabHistory">
+        <tr>
+            <th>Page</th>
+            <th>URL</th>
+            <th>Saved On</th>
+            <th>Remove</th>
+        </tr>
+    </table>
+    <div class="buttonDiv">
+    <button id = "restoreAll">Restore All</button>
+    <button id = "removeAll">Remove All</button>
+    <button id = "undo">Undo Remove All</button>
+    </div>
+    </div>
+    <script src = "tabList.js"></script>
+</body>
+</html>
