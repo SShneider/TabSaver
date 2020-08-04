@@ -5,11 +5,13 @@ const removeHistoryButton = document.getElementById("removeAll")
 const restoreAllTabsButton = document.getElementById("restoreAll")
 const printableCheckbox = document.getElementById("printable")
 const undoButton = document.getElementById("undo")
+const restoreAndRemoveButton = document.getElementById("restoreAndRemove")
 const tabStorage = window.localStorage
 const tabList = []
 
 saveCurrentButton.addEventListener("click", saveAndClose)
 removeHistoryButton.addEventListener("click", removeHistory)
+restoreAndRemoveButton.addEventListener("click", restoreAndRemove)
 restoreAllTabsButton.addEventListener("click", restoreAll)
 printableCheckbox.addEventListener("click", convertUrls)
 undoButton.addEventListener("click", undo)
@@ -101,11 +103,7 @@ function createRow(tab, savedOrNot = 0){
     }
 }
 
-function removeHistory(){
-    tabStorage.removeItem("OMRTabs")
-    tabStorage.setItem("OMRBackup", JSON.stringify(savedTabs))
-    reloadPage(0)
-}
+
 
 function undo(){
     let backUp;
@@ -120,12 +118,20 @@ function undo(){
     
     reloadPage(backUp.length)
 }
-
-function restoreAll(){
+function restoreAndRemove(){
+    restoreAll(300)
+    removeHistory(savedTabs.length*1.5)
+}
+function removeHistory(delay = 0){
+    tabStorage.removeItem("OMRTabs")
+    tabStorage.setItem("OMRBackup", JSON.stringify(savedTabs))
+    reloadPage(delay)
+}
+function restoreAll(delay = savedTabs.length){
     for (key in savedTabs){
         chrome.tabs.create({url: savedTabs[key].url})
     }
-    reloadPage(savedTabs.length)
+    reloadPage(delay)
 }
 
 function generateRemoveButton(itemId){
